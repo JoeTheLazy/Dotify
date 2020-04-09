@@ -88,6 +88,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_previous"
         android:layout_marginTop="12dp"
+        android:onClick="prevClicked"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintTop_toBottomOf="@id/plays_text"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -100,6 +101,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_play"
         android:layout_marginTop="12dp"
+        android:onClick="playClicked"
         app:layout_constraintTop_toBottomOf="@id/plays_text"
         app:layout_constraintLeft_toRightOf="@id/prev_button"
         app:layout_constraintRight_toLeftOf="@id/next_button"/>
@@ -110,6 +112,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_next"
         android:layout_marginTop="12dp"
+        android:onClick="nextClicked"
         app:layout_constraintTop_toBottomOf="@id/plays_text"
         app:layout_constraintLeft_toRightOf="@id/play_button"
         app:layout_constraintRight_toRightOf="parent"
