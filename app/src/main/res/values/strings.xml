@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Dotify</string>
+    <string name="default_username">That_Guy</string>
+    <string name="change_user_text">Change User</string>
+    <string name="apply_text">Apply</string>
+    <string name="default_song_name">Snow Angels</string>
+    <string name="default_artist_name">Anamanaguchi</string>
 </resources>
