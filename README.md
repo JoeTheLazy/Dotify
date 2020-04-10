@@ -7,3 +7,7 @@ The Dotify app is a simple mockup of a music player for android phones. It featu
 
 No music playing or song organizing functionality exists. This app is only a simple mockup of a potential screen for Dotify.
 
+EXTRA CREDIT ATTEMPTED:
+
+5: 1:1 sizing for album art.
+
