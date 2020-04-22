@@ -18,12 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         assignRandomPlays()
 
-        username_button.setOnClickListener {
-            changeNameClicked()
-        }
-
         prev_button.setOnClickListener {
-            prevClicked()
+            showMessage("Skipping to previous track")
         }
 
         play_button.setOnClickListener {
@@ -31,51 +27,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         next_button.setOnClickListener {
-            nextClicked()
+            showMessage("Skipping to next track")
         }
     }
 
+    // Changes the # of plays text for the current song to some random value between 0-10000.
     private fun assignRandomPlays() {
         val playsText = findViewById<TextView>(R.id.plays_text)
         val randomNum = Random.nextInt(0, 10000)
         playsText.text = "$randomNum plays"
     }
 
-    private fun changeNameClicked() {
-        val changeButton = findViewById<Button>(R.id.username_button)
-        val userText = findViewById<TextView>(R.id.username_text)
-        val editText = findViewById<EditText>(R.id.username_edit)
-
-        userText.visibility = View.GONE
-        editText.visibility = View.VISIBLE
-
-        changeButton.apply {
-            text = "Apply"
-            setOnClickListener {
-                applyClicked(changeButton, userText, editText)
-            }
-        }
-    }
-
-    private fun applyClicked(changeButton: Button, userTextView: TextView, userEditText: EditText) {
-
-        userTextView.visibility = View.VISIBLE
-        userEditText.visibility = View.GONE
-
-        val newUserName = userEditText.text.toString()
-        userEditText.setText("")
-
-        userTextView.text = newUserName
-
-        changeButton.setOnClickListener {
-            changeNameClicked()
-        }
-    }
-
-    private fun prevClicked() {
-        Toast.makeText(this, "Skipping to previous track", Toast.LENGTH_SHORT).show()
-    }
-
+    // Increments the # of plays text for the current song.
     private fun playClicked() {
         val playsText = findViewById<TextView>(R.id.plays_text)
         val numPlaysString = playsText.text.toString().split(" ")[0]
@@ -83,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         playsText.text = "$numPlays plays"
     }
 
-    private fun nextClicked() {
-        Toast.makeText(this, "Skipping to next track", Toast.LENGTH_SHORT).show()
+    // Briefly displays at bottom given String message.
+    private fun showMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
-
 }
