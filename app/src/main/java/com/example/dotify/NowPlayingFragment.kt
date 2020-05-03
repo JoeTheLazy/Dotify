@@ -19,7 +19,7 @@ class NowPlayingFragment: Fragment() {
 
     companion object {
         val TAG: String = NowPlayingFragment::class.java.simpleName
-
+        const val STATE_PLAYS = "numberOfPlays"
         private const val SONG_KEY = "ARG_SONG"
 
         fun getInstance(song: Song) = NowPlayingFragment().apply {
@@ -32,7 +32,14 @@ class NowPlayingFragment: Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        assignRandomPlays()
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                numPlays = getInt(STATE_PLAYS)
+            }
+            playsText.text = "$numPlays plays"
+        } else {
+            assignRandomPlays()
+        }
 
         arguments?.let { args ->
             val givenSong: Song? = args.getParcelable(SONG_KEY)
@@ -66,6 +73,13 @@ class NowPlayingFragment: Fragment() {
         next_button.setOnClickListener {
             showMessage("Skipping to next track")
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState?.run {
+            putInt(STATE_PLAYS, numPlays)
+        }
+        super.onSaveInstanceState(outState)
     }
 
     fun updateSong(song: Song) {

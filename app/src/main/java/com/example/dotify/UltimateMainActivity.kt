@@ -20,6 +20,13 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         this.title = "All Songs"
         songList = SongDataProvider.getAllSongs()
 
+        if (savedInstanceState != null) {
+            with(savedInstanceState) {
+                currentSong = getParcelable(STATE_SONG)
+            }
+            onSongClicked(currentSong!!)
+        }
+
         if (supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) == null) {
             val songListFragment = SongListFragment.getInstance(songList)
 
@@ -28,8 +35,6 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
                 .add(R.id.fragContainer, songListFragment, SongListFragment.TAG)
                 .addToBackStack(SongListFragment.TAG)
                 .commit()
-        } else {
-            println("Filler")
         }
 
         supportFragmentManager.addOnBackStackChangedListener {
@@ -58,6 +63,13 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         return super.onNavigateUp()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState?.run {
+            putParcelable(STATE_SONG, currentSong)
+        }
+
+        super.onSaveInstanceState(outState)
+    }
 
     override fun onSongClicked(song: Song) {
         main_song_text_preview.text = "${song.title} - ${song.artist}"
@@ -82,5 +94,9 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
 
     private fun getListFragment() = supportFragmentManager.findFragmentByTag(SongListFragment.TAG) as? SongListFragment
     private fun getNowFragment() = supportFragmentManager.findFragmentByTag(NowPlayingFragment.TAG) as? NowPlayingFragment
+
+    companion object {
+        const val STATE_SONG = "savedSong"
+    }
 
 }
