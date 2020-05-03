@@ -16,7 +16,7 @@ class SongListFragment: Fragment() {
 
     companion object {
         val TAG: String = SongListFragment::class.java.simpleName
-        private const val LIST_KEY = "LIST_KEY"
+        private const val LIST_KEY = "ARG_LIST"
 
         fun getInstance(songList: List<Song>): SongListFragment {
             return SongListFragment().apply {
@@ -48,7 +48,7 @@ class SongListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return layoutInflater.inflate(R.layout.activity_song_list, container, false)
+        return layoutInflater.inflate(R.layout.fragment_song_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,7 +62,7 @@ class SongListFragment: Fragment() {
         }
     }
 
-    fun shuffleSongs() {
+    fun shuffleList() {
         var newList = songList.shuffled()
         songAdapter.change(newList)
     }
