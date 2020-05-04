@@ -18,11 +18,9 @@ class SongListFragment: Fragment() {
         val TAG: String = SongListFragment::class.java.simpleName
         private const val LIST_KEY = "ARG_LIST"
 
-        fun getInstance(songList: List<Song>): SongListFragment {
-            return SongListFragment().apply {
-                arguments = Bundle().apply {
-                    putParcelableArrayList(LIST_KEY, ArrayList(songList))
-                }
+        fun getInstance(songList: List<Song>) = SongListFragment().apply {
+            arguments = Bundle().apply {
+                putParcelableArrayList(LIST_KEY, ArrayList(songList))
             }
         }
     }
@@ -37,6 +35,14 @@ class SongListFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        arguments?.let { args ->
+            with(args) {
+                getParcelableArrayList<Song>(LIST_KEY)?.let { songs ->
+                    this@SongListFragment.songList = songs.toMutableList()
+                }
+            }
+        }
 
         arguments?.getParcelableArrayList<Song>(LIST_KEY)?.let { savedSongList ->
             this.songList = savedSongList

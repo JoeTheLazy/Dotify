@@ -17,7 +17,6 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ultimate_main)
 
-        this.title = "All Songs"
         songList = SongDataProvider.getAllSongs()
 
         if (savedInstanceState != null) {
@@ -38,7 +37,7 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         }
 
         supportFragmentManager.addOnBackStackChangedListener {
-            val hasBackStack = supportFragmentManager.backStackEntryCount > 0
+            val hasBackStack = supportFragmentManager.backStackEntryCount > 1
 
             if (hasBackStack) {
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -48,13 +47,17 @@ class UltimateMainActivity : AppCompatActivity(), OnSongClickListener {
         }
 
         main_shuffle_button.setOnClickListener {
-            val songListFragment = getListFragment()
-            songListFragment?.shuffleList()
+           selectSong()
         }
 
         main_bottom_bar.setOnClickListener {
             onBottomBarClicked()
         }
+    }
+
+    private fun selectSong() {
+        val songListFragment = getListFragment()
+        songListFragment?.shuffleList()
     }
 
     override fun onSupportNavigateUp(): Boolean {
