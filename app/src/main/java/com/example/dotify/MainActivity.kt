@@ -10,7 +10,7 @@ import android.widget.Toast
 import com.ericchee.songdataprovider.Song
 import com.ericchee.songdataprovider.SongDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_song_list.*
+
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
